@@ -1,0 +1,19 @@
+// Customize bootstrap variables before importing them.
+$primary: #4fc3f7;
+$primary-darker: #0093c4;
+$secondary: #8bf6ff;
+//$success: $success;
+//$info: $info;
+//$warning: $warning;
+//$danger: $danger;
+$light: #F3F3F3;
+//$dark: $dark;
+
+// Bootstrap and its default variables.
+@import '~bootstrap/scss/bootstrap';
+// BootstrapVue and its default variables.
+@import '~bootstrap-vue/src/index.scss';
+
+// Import boostrap component styles. 
+@import '~bootstrap/dist/css/bootstrap.css';
+@import '~bootstrap-vue/dist/bootstrap-vue.css';
