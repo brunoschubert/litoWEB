@@ -1,26 +1,24 @@
 <template>
   <div id="app">
-  <!-- HEADER -->
-  <b-navbar toggleable="lg" type="dark" variant="primary">
-    <b-navbar-brand href="#">LitoWEB</b-navbar-brand>
-  </b-navbar>
-  <!-- CONTENT CONTAINER -->
-  <dashboard/>
+    <!-- HEADER -->
+    <b-navbar toggleable="lg" type="dark" variant="primary">
+      <b-navbar-brand href="#">LitoWEB</b-navbar-brand>
+    </b-navbar>
+    <!-- CONTENT CONTAINER -->
+    <dashboard />
   </div>
 </template>
 
 <script>
-import './scss/custom-theme.scss'
-//import HelloWorld from './components/HelloWorld.vue'
-import Dashboard from './components/Dashboard.vue'
+import "./scss/custom-theme.scss";
+import Dashboard from "./components/Dashboard.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    //HelloWorld,
     Dashboard
-  }
-}
+  },
+};
 </script>
 
 <style>
