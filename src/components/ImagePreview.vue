@@ -21,13 +21,15 @@ export default {
   watch: {
     code() {
       // Change to oncanvaschanged(e)?
-      let data = {};
-      data.dataUrl = document.getElementById("tag").toDataURL("image/png");
-      data.sampleTag = document
-        .getElementById("tag")
-        .toDataURL("image/png", [0.0, 1.0])
-        .split(",")[1];
-      this.$root.$emit("newTAGImage", data);
+      this.$nextTick(() => {
+        let data = {};
+        data.dataUrl = document.getElementById("tag").toDataURL("image/png");
+        data.sampleTag = document
+          .getElementById("tag")
+          .toDataURL("image/png", [0.0, 1.0])
+          .split(",")[1];
+        this.$root.$emit("newTAGImage", data);
+      });
     },
   },
   mounted() {
