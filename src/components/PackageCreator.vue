@@ -77,7 +77,7 @@ export default {
     return {
       name: "",
       description: "",
-      sampleTAG: null,
+      sampleTAG: {},
       modelFile: null,
       modelMaterial: null,
       modelTexture: null,
@@ -85,6 +85,21 @@ export default {
       documents: [],
       show: true,
     };
+  },
+  watch: {
+    name() {
+      let data = this.name + this.description;
+      this.$root.$emit("upadateTAG", data);
+    },
+    description() {
+      let data = this.name + this.description;
+      this.$root.$emit("upadateTAG", data);
+    },
+  },
+  mounted() {
+    this.$root.$on("newTAGImage", (data) => {
+      this.sampleTAG = data;
+    });
   },
   methods: {
     onSubmit(evt) {
@@ -96,6 +111,7 @@ export default {
       // Reset our form values
       this.name = "";
       this.description = "";
+      this.arTAG = null;
       this.modelFile = null;
       this.modelMaterial = null;
       this.modelTexture = null;
@@ -117,14 +133,21 @@ export default {
       let packageJSON = this.createJSON(modelpath, imgPath, docPath);
       let packageName = "package.json";
 
-      console.log("===================");
-      console.log(JSON.stringify(packageJSON));
-      console.log("===================");
+      // console.log("===================");
+      // console.log(JSON.stringify(packageJSON));
+      // console.log("===================");
 
-      // Create Folder Structure.
+      // Create the Zip Object{} that hold files.
       let zip = new JsZip();
 
+      // Create Folder Structure.
       zip.file(packageName, JSON.stringify(packageJSON));
+
+      // Makes sure it encodes just the Data. Not the DataURL
+      zip.file(this.name + "TAG.png", this.sampleTAG.sampleTag, {
+        base64: true,
+      });
+      //zip.file(this.name + "TAG.png", this.sampleTAG, { binary: true });
 
       zip.file(modelpath + this.modelFile.name, this.modelFile);
 
@@ -137,11 +160,15 @@ export default {
         zip.file(imgPath + image.name, image);
       }
 
-      for (let doc in this.documents) {
+      for (let i = 0; i < this.documents.length; i++) {
+        let doc = this.doc[i];
         zip.file(docPath + doc.name, doc);
       }
 
-      // Create File and Download it.
+      // Save the AR Tag.
+      FileSaver.saveAs(this.sampleTAG.dataUrl, this.name + "TAG.png");
+
+      // Create the Package File and Download it.
       zip.generateAsync({ type: "blob" }).then(function(content) {
         FileSaver.saveAs(content, "package.zip");
       });
@@ -150,7 +177,7 @@ export default {
       let packageJSON = {};
       packageJSON.name = this.name;
       packageJSON.description = this.description;
-      packageJSON.sampleTAG = this.sampleTAG;
+      packageJSON.sampleTAG = this.name + "TAG.png";
 
       packageJSON.model = {};
       packageJSON.model.modelFile = "/" + modelpath + this.modelFile.name;
