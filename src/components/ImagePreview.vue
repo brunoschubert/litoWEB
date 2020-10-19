@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1 class="text-title">AR TAG</h1>
     <vue-qrcode
       id="tag"
       :value="code"
@@ -41,4 +42,12 @@ export default {
 //document.getElementsByTagName("canvas")[0].toDataURL("image/png")
 </script>
 
-<style></style>
+<style>
+.text-title {
+  margin-top: 5vh;
+  color: rgb(66, 66, 66);
+}
+#tag {
+  margin-top: 10vh;
+}
+</style>

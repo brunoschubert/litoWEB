@@ -1,27 +1,35 @@
 <template>
   <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+    <h1 class="text-title">AR Sample Package Creator</h1>
     <b-form-input
       class="input-field"
       v-model="name"
       required
-      placeholder="Enter sample name"
+      placeholder="Enter sample's name."
     ></b-form-input>
 
     <b-form-textarea
       class="input-field"
       v-model="description"
       required
-      placeholder="Enter sample description"
+      placeholder="Enter sample's description."
       size="md"
     ></b-form-textarea>
+
+    <b-form-file
+      class="input-field"
+      v-model="modelFile"
+      required
+      placeholder="Choose your sample's model or drop it here."
+    ></b-form-file>
 
     <b-row class="justify-content-md-center">
       <b-col cols md="6" sm="10">
         <b-form-file
           class="input-field"
-          v-model="modelFile"
+          v-model="modelMaterial"
           required
-          placeholder="Choose your sample's model or drop it here."
+          placeholder="Sample's material."
         ></b-form-file>
       </b-col>
 
@@ -30,22 +38,14 @@
           class="input-field"
           v-model="modelTexture"
           required
-          placeholder="Choose your sample's texture or drop it here."
+          placeholder="Sample's texture."
         ></b-form-file>
       </b-col>
     </b-row>
 
     <b-form-file
       class="input-field"
-      v-model="modelMaterial"
-      required
-      placeholder="Choose your sample's material or drop it here."
-    ></b-form-file>
-
-    <b-form-file
-      class="input-field"
       v-model="images"
-      required
       multiple
       placeholder="Choose your sample's images or drop them here."
     ></b-form-file>
@@ -54,12 +54,29 @@
       class="input-field"
       v-model="documents"
       multiple
-      directory
       placeholder="Choose your sample's documents or drop them here."
     ></b-form-file>
 
-    <b-button type="submit" variant="primary">Submit</b-button>
-    <b-button type="reset" variant="danger">Reset</b-button>
+    <b-row>
+      <b-col cols="6">
+        <b-button
+          type="submit"
+          class="create-package"
+          size="lg"
+          variant="primary"
+          >Create Package</b-button
+        >
+      </b-col>
+      <b-col cols="6">
+        <b-button
+          type="reset"
+          class="reset-package"
+          size="lg"
+          variant="outline-danger"
+          >Reset Data</b-button
+        >
+      </b-col>
+    </b-row>
   </b-form>
 </template>
 
@@ -129,10 +146,6 @@ export default {
       let packageJSON = this.createJSON(modelpath, imgPath, docPath);
       let packageName = "package.json";
 
-      // console.log("===================");
-      // console.log(JSON.stringify(packageJSON));
-      // console.log("===================");
-
       // Create the Zip Object{} that hold files.
       let zip = new JsZip();
 
@@ -143,7 +156,6 @@ export default {
       zip.file(this.name + "TAG.png", this.sampleTAG.sampleTag, {
         base64: true,
       });
-      //zip.file(this.name + "TAG.png", this.sampleTAG, { binary: true });
 
       zip.file(modelpath + this.modelFile.name, this.modelFile);
 
@@ -194,5 +206,21 @@ export default {
 .input-field {
   margin-top: 2.5vh;
   margin-bottom: 2.5vh;
+}
+.create-package {
+  margin-bottom: 3vh;
+  margin-top: 2.5vh;
+  color: #fff;
+  border-radius: 25px;
+  margin-left: 8vw;
+}
+.reset-package {
+  margin-bottom: 3vh;
+  margin-top: 2.5vh;
+  border-radius: 25px;
+  margin-right: 10vw;
+}
+.text-title {
+  color: rgb(66, 66, 66);
 }
 </style>

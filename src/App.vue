@@ -28,7 +28,7 @@ export default {
     url(./fonts/Montserrat-Regular.ttf) format("truetype");
 }
 #app {
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: "Montserrat", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
