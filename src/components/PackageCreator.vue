@@ -6,7 +6,6 @@
       required
       placeholder="Enter sample name"
     ></b-form-input>
-    <div class="mt-3">Name: {{ name }}</div>
 
     <b-form-textarea
       class="input-field"
@@ -15,7 +14,6 @@
       placeholder="Enter sample description"
       size="md"
     ></b-form-textarea>
-    <div class="mt-3">Selected file: {{ description }}</div>
 
     <b-row class="justify-content-md-center">
       <b-col cols md="6" sm="10">
@@ -36,8 +34,6 @@
         ></b-form-file>
       </b-col>
     </b-row>
-    <div class="mt-3">Selected model: {{ modelFile }}</div>
-    <div class="mt-3">Selected texture: {{ modelTexture }}</div>
 
     <b-form-file
       class="input-field"

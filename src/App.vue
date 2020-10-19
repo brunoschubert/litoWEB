@@ -16,17 +16,28 @@ import Dashboard from "./components/Dashboard.vue";
 export default {
   name: "App",
   components: {
-    Dashboard
+    Dashboard,
   },
 };
 </script>
 
 <style>
+@font-face {
+  font-family: "Montserrat";
+  src: local("Montserrat"),
+    url(./fonts/Montserrat-Regular.ttf) format("truetype");
+}
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  height: 100vh;
+  background-color: #4e5050;
+}
+.navbar-brand {
+  font-family: "Montserrat";
+  font-size: 25px;
+  font-weight: 500;
 }
 </style>
